@@ -3,9 +3,11 @@ import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { SalaryService } from "../../services/SalaryService"
+import { UserService } from "../../services/UserService"
 
 interface IState {
   salary: ISalary[]
+  users: IUser[]
   loading: boolean
   error?: Error
 }
@@ -13,8 +15,25 @@ interface IState {
 const fields: IField[] = [
   {
     name: "employee",
-    label: "Employee",
+    label: "employee",
+    type: "option",
     validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "username",
+      valueKey: "_id",
+    },
+  },
+  {
+    name: "user",
+    label: "Username",
+    type: "option",
+    optionData: {
+      data: [],
+      textKey: "username",
+      valueKey: "_id",
+    },
+    hideForm: true,
   },
   {
     name: "total",
@@ -26,13 +45,16 @@ const fields: IField[] = [
 export default class Salary extends Component<{}, IState> {
   public state: IState = {
     salary: [],
+    users: [],
     loading: false,
   }
 
   public salaryService = new SalaryService()
+  public userService = new UserService()
 
   public componentDidMount() {
     this.getSalary()
+    this.getUser()
   }
 
   public getSalary() {
@@ -42,6 +64,9 @@ export default class Salary extends Component<{}, IState> {
       .then((salary) => this.setState({ salary }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
+  }
+  public getUser() {
+    this.userService.get().then((users) => this.setState({ users }))
   }
 
   public createSalary(input: ISalary) {
@@ -67,8 +92,12 @@ export default class Salary extends Component<{}, IState> {
       .then(() => this.getSalary())
       .catch((error) => this.setState({ error, loading: false }))
   }
+  public setOptionsData() {
+    fields[0].optionData!.data = this.state.users
+  }
 
   public render() {
+    this.setOptionsData()
     return (
       <Fragment>
         <Header content="Salary" subheader="List of salary data" />

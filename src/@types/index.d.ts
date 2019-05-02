@@ -14,6 +14,7 @@ declare interface IField {
   validations?: string[]
   optionData?: IOptionData
   hide?: boolean
+  hideForm?: boolean
 }
 
 declare interface IOptionData {
@@ -66,7 +67,7 @@ declare interface IItem {
 }
 declare interface IItemin {
   _id: string
-  item_name: string
+  item?: IItem | string
   qty: number
   price: number
 }
@@ -83,25 +84,30 @@ declare interface IItemout {
 
 declare interface ISalary {
   _id: string
-  employee: string
+  emloyee?: IUser | string
+  user: IUser | string
+  // employee: string
   total: number
 }
 
 declare interface ITransaction {
   _id: string
+  invoice: string
+  dateIn: date
   dateOut: date
   discount: number
   total: number
   grandTotal: number
   paymentStatus: string
   recepient: string
-  member: number
+  member?: IMember | number
+  user: IUser | string
 }
 declare interface IDetail {
   _id: string
   process: string
-  transaction: string
-  service: string
+  transaction?: IDetail | string
+  service?: IService | string
   qty: number
 }
 declare interface IOutcomein {
@@ -111,8 +117,9 @@ declare interface IOutcomein {
 
 declare interface IOutcome {
   _id: string
-  outcome_name: string
+  outcomein?: IOutcomein | string
   total: number
+  user: IUser | string
 }
 
 declare interface IAppContext {

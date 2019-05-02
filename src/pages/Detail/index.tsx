@@ -2,93 +2,141 @@ import React, { Component, Fragment } from "react"
 import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
-import { IteminService } from "../../services/IteminService"
+import { DetailService } from "../../services/DetailService"
+import { ServiceService } from "../../services/ServiceService"
+import { TransactionService } from "../../services/TransactionService"
 
 interface IState {
-  itemins: IItemin[]
+  details: IDetail[]
+  transaction: ITransaction[]
+  services: IService[]
   loading: boolean
   error?: Error
 }
 
 const fields: IField[] = [
   {
-    name: "item_name",
-    label: "Item Name",
+    name: "transaction",
+    label: "Invoice",
+    type: "option",
     validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "invoice",
+      valueKey: "_id",
+    },
+  },
+
+  {
+    name: "service",
+    label: "Service Name",
+    type: "option",
+    validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "serviceName",
+      valueKey: "_id",
+    },
+  },
+
+  {
+    name: "process",
+    label: "Process",
+    // validations: ["required"],
   },
   {
     name: "qty",
     label: "Quantity",
     validations: ["required", "numeric"],
   },
-  {
-    name: "price",
-    label: "Price",
-    validations: ["required", "numeric"],
-  },
 ]
 
-export default class Itemins extends Component<{}, IState> {
+export default class Idetails extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
-    itemins: [],
+    details: [],
+    transaction: [],
+    services: [],
     loading: false,
   }
 
-  public iteminService = new IteminService()
+  public detailService = new DetailService()
+  public transactionService = new TransactionService()
+  public serviceService = new ServiceService()
 
   public componentDidMount() {
-    this.getItemin()
+    this.getDetail()
+    this.getTransaction()
+    this.getMember()
   }
 
-  public getItemin() {
-    this.setState({ loading: true })
-    this.iteminService
+  public getMember() {
+    this.serviceService.get().then((services) => this.setState({ services }))
+  }
+
+  public getTransaction() {
+    this.transactionService
       .get()
-      .then((itemins) => this.setState({ itemins }))
+      .then((transaction) => this.setState({ transaction }))
+  }
+
+  public getDetail() {
+    this.setState({ loading: true })
+    this.detailService
+      .get()
+      .then((details) => this.setState({ details }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
   }
 
-  public createItemin(input: IItemin) {
+  public createDetail(input: IDetail) {
     this.setState({ loading: true })
-    this.iteminService
+    this.detailService
       .create(input)
-      .then(() => this.getItemin())
+      .then(() => this.getDetail())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public updateItemin(input: IItemin, id: string) {
+  public updateDetail(input: IDetail, id: string) {
     this.setState({ loading: true })
-    this.iteminService
+    this.detailService
       .update(input, id)
-      .then(() => this.getItemin())
+      .then(() => this.getDetail())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public deleteItemin(id: string) {
+  public deleteDetail(id: string) {
     this.setState({ loading: true })
-    this.iteminService
+    this.detailService
       .delete(id)
-      .then(() => this.getItemin())
+      .then(() => this.getDetail())
       .catch((error) => this.setState({ error, loading: false }))
+  }
+
+  public setOptionsData() {
+    fields[0].optionData!.data = this.state.transaction
+  }
+  public setOptionsData2() {
+    fields[1].optionData!.data = this.state.services
   }
 
   public render() {
+    this.setOptionsData()
+    this.setOptionsData2()
     return (
       <Fragment>
-        <Header content="Item In" subheader="List of Item In data" />
+        <Header content="Detail" subheader="List of Detail data" />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}
         />
-        <DataTable<IItemin>
-          data={this.state.itemins}
+        <DataTable<IDetail>
+          data={this.state.details}
           loading={this.state.loading}
           fields={fields}
-          onCreate={(input) => this.createItemin(input)}
-          onUpdate={(input) => this.updateItemin(input, input._id)}
-          onDelete={(input) => this.deleteItemin(input._id)}
+          onCreate={(input) => this.createDetail(input)}
+          onUpdate={(input) => this.updateDetail(input, input._id)}
+          onDelete={(input) => this.deleteDetail(input._id)}
         />
       </Fragment>
     )

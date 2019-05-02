@@ -2,39 +2,74 @@ import React, { Component, Fragment } from "react"
 import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
+import { MemberService } from "../../services/MemberService"
 import { TransactionService } from "../../services/TransactionService"
 
 interface IState {
   transaction: ITransaction[]
+  members: IMember[]
   loading: boolean
   error?: Error
 }
 
 const fields: IField[] = [
   {
-    name: "dateout",
+    name: "invoice",
+    label: "Invoice",
+    // validations: ["required"],
+    hideForm: true,
+  },
+  {
+    name: "dateIn",
+    label: "Date In",
+    // validations: ["required"],
+    hideForm: true,
+  },
+  {
+    name: "dateOut",
     label: "Date Out",
     // validations: ["required"],
+    hideForm: true,
   },
   {
     name: "member",
-    label: "MemberID",
-    validations: ["required", "numeric"],
+    label: "Member Name",
+    type: "option",
+    validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "member_name",
+      valueKey: "_id",
+    },
+  },
+  {
+    name: "user",
+    label: "Username",
+    type: "option",
+    optionData: {
+      data: [],
+      textKey: "username",
+      valueKey: "_id",
+    },
+    hideForm: true,
   },
   {
     name: "discount",
     label: "Discount",
     // validations: ["required"],
+    hideForm: true,
   },
   {
     name: "total",
     label: "Total",
     // validations: ["required"],
+    hideForm: true,
   },
   {
     name: "grandTotal",
     label: "Grand Total",
     // validations: ["required"],
+    hideForm: true,
   },
   {
     name: "recipient",
@@ -52,13 +87,20 @@ export default class Transaction extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
     transaction: [],
+    members: [],
     loading: false,
   }
 
   public transactionService = new TransactionService()
+  public memberService = new MemberService()
 
   public componentDidMount() {
     this.getTransaction()
+    this.getMember()
+  }
+
+  public getMember() {
+    this.memberService.get().then((members) => this.setState({ members }))
   }
 
   public getTransaction() {
@@ -94,7 +136,12 @@ export default class Transaction extends Component<{}, IState> {
       .catch((error) => this.setState({ error, loading: false }))
   }
 
+  public setOptionsData() {
+    fields[3].optionData!.data = this.state.members
+  }
+
   public render() {
+    this.setOptionsData()
     return (
       <Fragment>
         <Header content="Transaction" subheader="List of Transaction data" />

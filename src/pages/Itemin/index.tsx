@@ -3,18 +3,26 @@ import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { IteminService } from "../../services/IteminService"
+import { ItemService } from "../../services/ItemService"
 
 interface IState {
   itemins: IItemin[]
+  items: IItem[]
   loading: boolean
   error?: Error
 }
 
 const fields: IField[] = [
   {
-    name: "item_name",
+    name: "item",
     label: "Item Name",
+    type: "option",
     validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "item_name",
+      valueKey: "_id",
+    },
   },
   {
     name: "qty",
@@ -32,13 +40,20 @@ export default class Itemins extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
     itemins: [],
+    items: [],
     loading: false,
   }
 
   public iteminService = new IteminService()
+  public itemService = new ItemService()
 
   public componentDidMount() {
     this.getItemin()
+    this.getItem()
+  }
+
+  public getItem() {
+    this.itemService.get().then((items) => this.setState({ items }))
   }
 
   public getItemin() {
@@ -73,8 +88,11 @@ export default class Itemins extends Component<{}, IState> {
       .then(() => this.getItemin())
       .catch((error) => this.setState({ error, loading: false }))
   }
-
+  public setOptionsData() {
+    fields[0].optionData!.data = this.state.items
+  }
   public render() {
+    this.setOptionsData()
     return (
       <Fragment>
         <Header content="Item In" subheader="List of Item In data" />

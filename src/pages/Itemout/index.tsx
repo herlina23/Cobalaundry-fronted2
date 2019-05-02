@@ -3,18 +3,26 @@ import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { ItemoutService } from "../../services/ItemoutService"
+import { ItemService } from "../../services/ItemService"
 
 interface IState {
   itemouts: IItemout[]
+  items: IItem[]
   loading: boolean
   error?: Error
 }
 
 const fields: IField[] = [
   {
-    name: "item_name",
+    name: "item",
     label: "Item Name",
+    type: "option",
     validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "item_name",
+      valueKey: "_id",
+    },
   },
   {
     name: "qty",
@@ -27,13 +35,16 @@ export default class Itemouts extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
     itemouts: [],
+    items: [],
     loading: false,
   }
 
   public itemoutService = new ItemoutService()
+  public itemService = new ItemService()
 
   public componentDidMount() {
     this.getItemout()
+    this.getItem()
   }
 
   public getItemout() {
@@ -43,6 +54,11 @@ export default class Itemouts extends Component<{}, IState> {
       .then((itemouts) => this.setState({ itemouts }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
+  }
+
+  public getItem() {
+    // this.setState({ loading: true })
+    this.itemService.get().then((items) => this.setState({ items }))
   }
 
   public createItemout(input: IItemout) {
@@ -68,8 +84,12 @@ export default class Itemouts extends Component<{}, IState> {
       .then(() => this.getItemout())
       .catch((error) => this.setState({ error, loading: false }))
   }
+  public setOptionsData() {
+    fields[0].optionData!.data = this.state.items
+  }
 
   public render() {
+    this.setOptionsData()
     return (
       <Fragment>
         <Header content="Item Out" subheader="List of Item Out data" />

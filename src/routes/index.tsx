@@ -1,4 +1,5 @@
 import { Item } from "semantic-ui-react"
+import Detail from "../pages/Detail"
 import Diskon from "../pages/Diskon"
 import Items from "../pages/Item"
 import Itemins from "../pages/Itemin"
@@ -69,13 +70,20 @@ const routes: IRoute[] = [
     path: "/salary",
     private: true,
   },
-  // {
-  //   component: Transaction,
-  //   label: "Transaction",
-  //   icon: "dollar",
-  //   path: "/transaction",
-  //   private: true,
-  // },
+  {
+    component: Transaction,
+    label: "Transaction",
+    icon: "dollar",
+    path: "/transaction",
+    private: true,
+  },
+  {
+    component: Detail,
+    label: "Detail",
+    icon: "dollar",
+    path: "/detail",
+    private: true,
+  },
 
   {
     component: Outcomeins,

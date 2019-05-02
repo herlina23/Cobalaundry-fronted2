@@ -32,8 +32,12 @@ export default class DataTable<T> extends Component<IProps<T>, IState> {
     this.setState({ open: false })
   }
 
-  public getShownFields() {
+  public getTableFields() {
     return this.props.fields.filter((field) => !field.hide)
+  }
+
+  public getFormFields() {
+    return this.props.fields.filter((field) => !field.hideForm)
   }
 
   public render() {
@@ -46,7 +50,7 @@ export default class DataTable<T> extends Component<IProps<T>, IState> {
         />
         <Form
           open={this.state.open}
-          fields={this.props.fields}
+          fields={this.getFormFields()}
           initialInput={this.state.selectedData}
           onCreate={(input) => this.props.onCreate(input)}
           onUpdate={this.props.onUpdate}
@@ -57,7 +61,7 @@ export default class DataTable<T> extends Component<IProps<T>, IState> {
         <Table
           data={this.props.data}
           loading={this.props.loading}
-          shownFields={this.getShownFields()}
+          shownFields={this.getTableFields()}
           onRowClick={(rowData: any) => this.openForm(rowData)}
         />
       </Fragment>

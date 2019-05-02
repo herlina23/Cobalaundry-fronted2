@@ -37,10 +37,10 @@ export default class User extends Component<{}, IState> {
   public userService = new UserService()
 
   public componentDidMount() {
-    this.getMember()
+    this.getUser()
   }
 
-  public getMember() {
+  public getUser() {
     this.setState({ loading: true })
     this.userService
       .get()
@@ -53,7 +53,7 @@ export default class User extends Component<{}, IState> {
     this.setState({ loading: true })
     this.userService
       .create(input)
-      .then(() => this.getMember())
+      .then(() => this.getUser())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
@@ -61,7 +61,7 @@ export default class User extends Component<{}, IState> {
     this.setState({ loading: true })
     this.userService
       .update(input, id)
-      .then(() => this.getMember())
+      .then(() => this.getUser())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
@@ -69,7 +69,7 @@ export default class User extends Component<{}, IState> {
     this.setState({ loading: true })
     this.userService
       .delete(id)
-      .then(() => this.getMember())
+      .then(() => this.getUser())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
