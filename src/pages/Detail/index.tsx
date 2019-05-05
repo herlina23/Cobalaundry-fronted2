@@ -3,6 +3,7 @@ import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { DetailService } from "../../services/DetailService"
+import { ProcessService } from "../../services/ProcessService"
 import { ServiceService } from "../../services/ServiceService"
 import { TransactionService } from "../../services/TransactionService"
 
@@ -10,6 +11,7 @@ interface IState {
   details: IDetail[]
   transaction: ITransaction[]
   services: IService[]
+  processs: IProcess[]
   loading: boolean
   error?: Error
 }
@@ -20,6 +22,7 @@ const fields: IField[] = [
     label: "Invoice",
     type: "option",
     validations: ["required"],
+    hideForm: true,
     optionData: {
       data: [],
       textKey: "invoice",
@@ -29,7 +32,7 @@ const fields: IField[] = [
 
   {
     name: "service",
-    label: "Service Name",
+    label: "Paket Laundry",
     type: "option",
     validations: ["required"],
     optionData: {
@@ -41,37 +44,56 @@ const fields: IField[] = [
 
   {
     name: "process",
-    label: "Process",
-    // validations: ["required"],
+    label: "Proses Laundry",
+    type: "option",
+    validations: ["required"],
+    optionData: {
+      data: [],
+      textKey: "process_name",
+      valueKey: "_id",
+    },
   },
+
+  // {
+  //   name: "process",
+  //   label: "Proses",
+  //   // validations: ["required"],
+  // },
   {
     name: "qty",
-    label: "Quantity",
+    label: "Jumlah",
     validations: ["required", "numeric"],
   },
 ]
 
-export default class Idetails extends Component<{}, IState> {
+// export default class Idetails extends Component<{}, IState> {
+export default class Detail extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
     details: [],
     transaction: [],
     services: [],
+    processs: [],
     loading: false,
   }
 
   public detailService = new DetailService()
   public transactionService = new TransactionService()
   public serviceService = new ServiceService()
+  public processService = new ProcessService()
 
   public componentDidMount() {
     this.getDetail()
     this.getTransaction()
     this.getMember()
+    this.getProcess()
   }
 
   public getMember() {
     this.serviceService.get().then((services) => this.setState({ services }))
+  }
+  public getProcess() {
+    this.processService.get().then((processs) => this.setState({ processs }))
   }
 
   public getTransaction() {
@@ -119,10 +141,14 @@ export default class Idetails extends Component<{}, IState> {
   public setOptionsData2() {
     fields[1].optionData!.data = this.state.services
   }
+  public setOptionsData3() {
+    fields[2].optionData!.data = this.state.processs
+  }
 
   public render() {
     this.setOptionsData()
     this.setOptionsData2()
+    this.setOptionsData3()
     return (
       <Fragment>
         <Header content="Detail" subheader="List of Detail data" />

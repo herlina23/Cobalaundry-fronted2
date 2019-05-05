@@ -23,7 +23,7 @@ const fields: IField[] = [
   },
   {
     name: "role",
-    label: "Role",
+    label: "Jabatan",
     validations: ["required"],
   },
 ]

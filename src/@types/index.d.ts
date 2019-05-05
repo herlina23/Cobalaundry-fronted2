@@ -98,14 +98,15 @@ declare interface ITransaction {
   discount: number
   total: number
   grandTotal: number
-  paymentStatus: string
+  status?: IStatus | string
   recepient: string
   member?: IMember | number
   user: IUser | string
+  detail: string[]
 }
 declare interface IDetail {
   _id: string
-  process: string
+  process?: IProcess | string
   transaction?: IDetail | string
   service?: IService | string
   qty: number
@@ -113,6 +114,14 @@ declare interface IDetail {
 declare interface IOutcomein {
   _id: string
   outcome_name: string
+}
+declare interface IStatus {
+  _id: string
+  status_name: string
+}
+declare interface IProcess {
+  _id: string
+  process_name: string
 }
 
 declare interface IOutcome {

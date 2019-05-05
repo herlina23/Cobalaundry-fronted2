@@ -15,7 +15,7 @@ interface IState {
 const fields: IField[] = [
   {
     name: "outcomein",
-    label: "Outcome Name",
+    label: "Nama Pengeluaran",
     type: "option",
     validations: ["required"],
     optionData: {

@@ -15,7 +15,7 @@ interface IState {
 const fields: IField[] = [
   {
     name: "employee",
-    label: "employee",
+    label: "Nama Pegawai",
     type: "option",
     validations: ["required"],
     optionData: {
@@ -37,7 +37,7 @@ const fields: IField[] = [
   },
   {
     name: "total",
-    label: "Total",
+    label: "Total Gaji",
     validations: ["required", "numeric"],
   },
 ]

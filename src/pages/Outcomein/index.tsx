@@ -13,7 +13,7 @@ interface IState {
 const fields: IField[] = [
   {
     name: "outcomein_name",
-    label: "OutcomeIn Name",
+    label: "Nama Pengeluaran",
     validations: ["required"],
   },
 ]

@@ -4,13 +4,11 @@ import { Button, Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { MemberService } from "../../services/MemberService"
-import { StatusService } from "../../services/StatusService"
 import { TransactionService } from "../../services/TransactionService"
 
 interface IState {
   transaction: ITransaction[]
   members: IMember[]
-  statuss: IStatus[]
   loading: boolean
   error?: Error
 }
@@ -24,19 +22,19 @@ const fields: IField[] = [
   },
   {
     name: "dateIn",
-    label: "Tgl Masuk",
+    label: "Date In",
     // validations: ["required"],
     hideForm: true,
   },
   {
     name: "dateOut",
-    label: "Tgl Ambil",
+    label: "Date Out",
     // validations: ["required"],
     hideForm: true,
   },
   {
     name: "member",
-    label: "Nama Member",
+    label: "Member Name",
     type: "option",
     validations: ["required"],
     optionData: {
@@ -58,7 +56,7 @@ const fields: IField[] = [
   },
   {
     name: "discount",
-    label: "Diskon",
+    label: "Discount",
     // validations: ["required"],
     hideForm: true,
   },
@@ -76,24 +74,13 @@ const fields: IField[] = [
   },
   {
     name: "recipient",
-    label: "Penerima",
+    label: "Recipient",
     // validations: ["required"],
   },
-  // {
-  //   name: "paymentStatus",
-  //   label: "Status Bayar",
-  //   // validations: ["required"],
-  // },
   {
-    name: "status",
-    label: "Status Bayar",
-    type: "option",
-    validations: ["required"],
-    optionData: {
-      data: [],
-      textKey: "status_name",
-      valueKey: "_id",
-    },
+    name: "paymentStatus",
+    label: "PaymentStatus",
+    // validations: ["required"],
   },
 ]
 
@@ -102,25 +89,19 @@ export default class Transaction extends Component<{}, IState> {
   public state: IState = {
     transaction: [],
     members: [],
-    statuss: [],
     loading: false,
   }
 
   public transactionService = new TransactionService()
   public memberService = new MemberService()
-  public statusService = new StatusService()
 
   public componentDidMount() {
     this.getTransaction()
     this.getMember()
-    this.getStatus()
   }
 
   public getMember() {
     this.memberService.get().then((members) => this.setState({ members }))
-  }
-  public getStatus() {
-    this.statusService.get().then((statuss) => this.setState({ statuss }))
   }
 
   public getTransaction() {
@@ -156,30 +137,12 @@ export default class Transaction extends Component<{}, IState> {
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public renderAdditionalAction(transaction: ITransaction) {
-    return transaction._id ? (
-      <Link to={`/transaction/detail`}>
-        <Button
-          content="Detail"
-          color="orange"
-          onClick={() =>
-            localStorage.setItem("transaction", JSON.stringify(transaction))
-          }
-        />
-      </Link>
-    ) : null
-  }
-
   public setOptionsData() {
     fields[3].optionData!.data = this.state.members
-  }
-  public setOptionsData2() {
-    fields[9].optionData!.data = this.state.statuss
   }
 
   public render() {
     this.setOptionsData()
-    this.setOptionsData2()
     return (
       <Fragment>
         <Header content="Transaction" subheader="List of Transaction data" />
@@ -194,9 +157,6 @@ export default class Transaction extends Component<{}, IState> {
           onCreate={(input) => this.createTransaction(input)}
           onUpdate={(input) => this.updateTransaction(input, input._id)}
           onDelete={(input) => this.deleteTransaction(input._id)}
-          additionalAction={(transaction) =>
-            this.renderAdditionalAction(transaction)
-          }
         />
       </Fragment>
     )

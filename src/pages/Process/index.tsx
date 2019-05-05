@@ -2,93 +2,83 @@ import React, { Component, Fragment } from "react"
 import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
-import { ItemService } from "../../services/ItemService"
+import { ProcessService } from "../../services/ProcessService"
 
 interface IState {
-  items: IItem[]
+  processs: IProcess[]
   loading: boolean
   error?: Error
 }
 
 const fields: IField[] = [
   {
-    name: "item_name",
-    label: "Nama Barang",
+    name: "process_name",
+    label: "process Name",
     validations: ["required"],
-  },
-  {
-    name: "unit",
-    label: "Satuan",
-    validations: ["required"],
-  },
-  {
-    name: "stock",
-    label: "Stok",
-    validations: ["required", "numeric"],
   },
 ]
 
-export default class Items extends Component<{}, IState> {
+export default class Processs extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
-    items: [],
+    processs: [],
     loading: false,
   }
 
-  public itemService = new ItemService()
+  public processService = new ProcessService()
 
   public componentDidMount() {
-    this.getItem()
+    this.getProcess()
   }
 
-  public getItem() {
+  public getProcess() {
     this.setState({ loading: true })
-    this.itemService
+    this.processService
       .get()
-      .then((items) => this.setState({ items }))
+      .then((processs) => this.setState({ processs }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
   }
 
-  public createItem(input: IItem) {
+  public creatProcess(input: IProcess) {
     this.setState({ loading: true })
-    this.itemService
+    this.processService
       .create(input)
-      .then(() => this.getItem())
+      .then(() => this.getProcess())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public updateItem(input: IItem, id: string) {
+  public updateProcess(input: IProcess, id: string) {
     this.setState({ loading: true })
-    this.itemService
+    this.processService
       .update(input, id)
-      .then(() => this.getItem())
+      .then(() => this.getProcess())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public deleteItem(id: string) {
+  public deleteProcess(id: string) {
     this.setState({ loading: true })
-    this.itemService
+    this.processService
       .delete(id)
-      .then(() => this.getItem())
+      .then(() => this.getProcess())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
   public render() {
     return (
       <Fragment>
-        <Header content="Item" subheader="List of Item data" />
+        <Header content="Process In" subheader="List of Process In data" />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}
         />
-        <DataTable<IItem>
-          data={this.state.items}
+        <DataTable<IProcess>
+          data={this.state.processs}
           loading={this.state.loading}
           fields={fields}
-          onCreate={(input) => this.createItem(input)}
-          onUpdate={(input) => this.updateItem(input, input._id)}
-          onDelete={(input) => this.deleteItem(input._id)}
+          onCreate={(input) => this.createProcess(input)}
+          onUpdate={(input) => this.updateProcess(input, input._id)}
+          onDelete={(input) => this.deleteProcess(input._id)}
         />
       </Fragment>
     )

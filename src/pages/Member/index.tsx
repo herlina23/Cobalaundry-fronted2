@@ -13,17 +13,17 @@ interface IState {
 const fields: IField[] = [
   {
     name: "member_name",
-    label: "Name",
+    label: "Nama Member",
     validations: ["required"],
   },
   {
     name: "phone",
-    label: "Phone",
+    label: "Telepon",
     validations: ["required", "numeric"],
   },
   {
     name: "address",
-    label: "Address",
+    label: "Alamat",
     validations: ["required"],
   },
 ]

@@ -44,7 +44,8 @@ class Navigation extends Component<RouteComponentProps, IState> {
     return (
       <Menu
         vertical
-        size="large"
+        // size="large"
+        size="small"
         fixed="left"
         secondary
         pointing
