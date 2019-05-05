@@ -4,6 +4,7 @@ import { ServiceGenerator } from "./ServiceGenerator"
 
 interface ILogin {
   token?: string
+  user?: IUser
 }
 
 export class LoginService extends ServiceGenerator<ILogin> {

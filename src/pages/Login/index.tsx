@@ -49,6 +49,7 @@ export default class Login extends Component<RouteComponentProps, IState> {
         this.setState({ loading: false })
         if (data.token) {
           context.setToken(data.token)
+          context.setUser(data.user!)
           this.props.history.push("/")
         } else {
           this.resetValue()
@@ -70,7 +71,7 @@ export default class Login extends Component<RouteComponentProps, IState> {
     return (
       <Consumer>
         {(context) => {
-          this.redirectIfAuthenticated(context!.isLoggedIn())
+          this.redirectIfAuthenticated(context.isLoggedIn())
           return (
             <div style={styles.container}>
               <Card>

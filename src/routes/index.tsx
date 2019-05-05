@@ -20,6 +20,7 @@ const routes: IRoute[] = [
     icon: "address book",
     path: "/member",
     private: true,
+    role: ["admin", "kasir"],
   },
   {
     component: Diskon,
@@ -27,6 +28,7 @@ const routes: IRoute[] = [
     icon: "percent",
     path: "/diskon",
     private: true,
+    role: ["admin"],
   },
   {
     component: Service,
@@ -34,6 +36,7 @@ const routes: IRoute[] = [
     icon: "pencil",
     path: "/service",
     private: true,
+    role: ["admin"],
   },
   {
     component: User,
@@ -41,6 +44,7 @@ const routes: IRoute[] = [
     icon: "user",
     path: "/user",
     private: true,
+    role: ["admin"],
   },
   {
     component: Items,
@@ -48,6 +52,7 @@ const routes: IRoute[] = [
     icon: "window restore outline",
     path: "/item",
     private: true,
+    role: ["admin"],
   },
   {
     component: Itemins,
@@ -55,6 +60,7 @@ const routes: IRoute[] = [
     icon: "pencil",
     path: "/itemin",
     private: true,
+    role: ["admin", "kasir"],
   },
   {
     component: Itemouts,
@@ -62,6 +68,7 @@ const routes: IRoute[] = [
     icon: "pencil",
     path: "/itemout",
     private: true,
+    role: ["admin", "kasir"],
   },
   {
     component: Salary,
@@ -69,6 +76,7 @@ const routes: IRoute[] = [
     icon: "money bill alternate",
     path: "/salary",
     private: true,
+    role: ["admin"],
   },
   {
     component: Transaction,
@@ -76,6 +84,7 @@ const routes: IRoute[] = [
     icon: "clipboard list",
     path: "/transaction",
     private: true,
+    role: ["admin", "kasir"],
   },
   {
     component: Detail,
@@ -84,6 +93,7 @@ const routes: IRoute[] = [
     path: "/transaction/detail",
     hide: true,
     private: true,
+    role: ["admin", "kasir"],
   },
 
   {
@@ -92,6 +102,7 @@ const routes: IRoute[] = [
     icon: "list layout",
     path: "/outcomein",
     private: true,
+    role: ["admin", "kasir"],
   },
 
   {
@@ -100,12 +111,13 @@ const routes: IRoute[] = [
     icon: "money bill alternate outline",
     path: "/outcome",
     private: true,
+    role: ["admin", "kasir"],
   },
-
   {
     component: Login,
     path: "/login",
     hide: true,
+    role: ["admin", "kasir"],
   },
 ]
 

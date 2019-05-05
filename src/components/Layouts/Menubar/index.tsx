@@ -13,10 +13,14 @@ class Menubar extends Component {
       <Consumer>
         {(context) => (
           // <Menu fixed="top" inverted color="orange" borderless>
-            <Menu fixed="top" inverted color="teal" borderless>
+          <Menu fixed="top" inverted color="teal" borderless>
             <AppTitle />
             <Menu.Menu position="right">
-              <Dropdown item text="Administrator" pointing>
+              <Dropdown
+                item
+                text={context.user ? context.user.username : ""}
+                pointing
+              >
                 <Dropdown.Menu>
                   <Dropdown.Item
                     icon="sign-out"

@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link, RouteComponentProps, withRouter } from "react-router-dom"
 import { Header, Menu } from "semantic-ui-react"
+import { Consumer } from "../../../App"
 import routes from "../../../routes"
 
 interface IState {
@@ -23,9 +24,9 @@ class Navigation extends Component<RouteComponentProps, IState> {
     this.setState({ activeItem: name })
   }
 
-  public renderItems() {
+  public renderItems(role: string) {
     return routes.map((route) => {
-      return route.hide ? null : (
+      return route.hide || !route.role.includes(role) ? null : (
         <Menu.Item
           key={route.label}
           active={this.isActive(route)}
@@ -51,7 +52,9 @@ class Navigation extends Component<RouteComponentProps, IState> {
         pointing
         style={styles.container}
       >
-        {this.renderItems()}
+        <Consumer>
+          {(context) => this.renderItems(context.user ? context.user.role : "")}
+        </Consumer>
       </Menu>
     )
   }

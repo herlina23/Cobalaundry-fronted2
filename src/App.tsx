@@ -6,21 +6,33 @@ import Navigation from "./components/Layouts/Navigation"
 import PrivateRoute from "./components/PrivateRoute"
 import routes from "./routes"
 
-const context = React.createContext<IAppContext | null>(null)
+const context = React.createContext<IAppContext>({
+  isLoggedIn: () => false,
+  token: "",
+  setToken: () => {},
+  user: null,
+  setUser: () => {},
+})
 const { Provider, Consumer } = context
 
 interface IState {
   token: string
+  user: IUser | null
 }
 
 class App extends Component {
   public state: IState = {
     token: localStorage.getItem("authToken") || "",
+    user: null,
   }
 
   public setToken = (token: string) => {
     this.setState({ token })
     localStorage.setItem("authToken", token)
+  }
+
+  public setUser = (user: IUser) => {
+    this.setState({ user })
   }
 
   public isLoggedIn = () => {
@@ -51,8 +63,11 @@ class App extends Component {
     const providerValue = {
       token: this.state.token,
       setToken: this.setToken,
+      user: this.state.user,
+      setUser: this.setUser,
       isLoggedIn: this.isLoggedIn,
     }
+
     return (
       <Provider value={providerValue}>
         <BrowserRouter>

@@ -5,6 +5,7 @@ declare interface IRoute {
   component: React.FunctionComponent | React.Components
   hide?: boolean
   private?: boolean
+  role: string[]
 }
 
 declare interface IField {
@@ -134,5 +135,7 @@ declare interface IOutcome {
 declare interface IAppContext {
   token: string
   setToken: (token: string) => void
+  user: IUser | null
+  setUser: (user: IUser) => void
   isLoggedIn: () => boolean
 }
