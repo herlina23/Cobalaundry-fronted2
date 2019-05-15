@@ -47,6 +47,10 @@ export default class Itemouts extends Component<{}, IState> {
     this.getItem()
   }
 
+  public getItem() {
+    this.itemService.get().then((items) => this.setState({ items }))
+  }
+
   public getItemout() {
     this.setState({ loading: true })
     this.itemoutService
@@ -54,11 +58,6 @@ export default class Itemouts extends Component<{}, IState> {
       .then((itemouts) => this.setState({ itemouts }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
-  }
-
-  public getItem() {
-    // this.setState({ loading: true })
-    this.itemService.get().then((items) => this.setState({ items }))
   }
 
   public createItemout(input: IItemout) {
@@ -87,9 +86,9 @@ export default class Itemouts extends Component<{}, IState> {
   public setOptionsData() {
     fields[0].optionData!.data = this.state.items
   }
-
   public render() {
     this.setOptionsData()
+    // console.log(this.state.itemouts)
     return (
       <Fragment>
         <Header content="Item Out" subheader="List of Item Out data" />

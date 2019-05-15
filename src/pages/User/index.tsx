@@ -12,6 +12,11 @@ interface IState {
 
 const fields: IField[] = [
   {
+    name: "name",
+    label: "Nama",
+    validations: ["required"],
+  },
+  {
     name: "username",
     label: "Username",
     validations: ["required"],
@@ -20,6 +25,8 @@ const fields: IField[] = [
     name: "password",
     label: "Password",
     validations: ["required"],
+    hide: true,
+    type: "password",
   },
   {
     name: "role",

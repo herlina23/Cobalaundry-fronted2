@@ -36,6 +36,16 @@ const fields: IField[] = [
     hideForm: true,
   },
   {
+    name: "unit",
+    label: "Satuan",
+    validations: ["required"],
+  },
+  {
+    name: "qty",
+    label: "Jumlah",
+    validations: ["required", "numeric"],
+  },
+  {
     name: "total",
     label: "Total",
     validations: ["required", "numeric"],

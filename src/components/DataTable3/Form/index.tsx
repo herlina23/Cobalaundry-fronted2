@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Button, Confirm, Grid, Header, Modal } from "semantic-ui-react"
+import { Button, Grid, Header, Modal } from "semantic-ui-react"
 import FormInput from "./FormInput"
 import FormInputError from "./FormInputError"
 import FormValidator from "./FormValidator"
@@ -12,8 +12,6 @@ interface IProps {
   onUpdate?: (input: any) => void
   onDelete?: (input: any) => void
   onClose: () => void
-  // onConfirm: () => void
-
   additionalAction?: (selectedData: any) => JSX.Element | null
 }
 
@@ -144,8 +142,8 @@ export default class Form extends Component<IProps, IState> {
         </Modal.Content>
         <Modal.Actions>
           {this.renderAdditionalAction()}
-          {this.renderDeleteButton()}
-          {this.renderSubmitButton()}
+          {/* {this.renderDeleteButton()} */}
+          {/* {this.renderSubmitButton()} */}
         </Modal.Actions>
       </Modal>
     )

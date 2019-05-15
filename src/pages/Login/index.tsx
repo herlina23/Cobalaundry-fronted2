@@ -6,8 +6,8 @@ import { LoginService } from "../../services/LoginService"
 
 interface IState {
   input: {
-    username: string
-    password: string,
+    username: string;
+    password: string;
   }
   loading: boolean
 }
@@ -77,7 +77,7 @@ export default class Login extends Component<RouteComponentProps, IState> {
               <Card>
                 <Card.Content>
                   <Card.Header textAlign="center">
-                    <Header content="Admin Laundry" icon="user circle" />
+                    <Header content="QLaundry" icon="user circle" />
                   </Card.Header>
                 </Card.Content>
                 <Card.Content>

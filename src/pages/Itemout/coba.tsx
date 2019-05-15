@@ -2,11 +2,11 @@ import React, { Component, Fragment } from "react"
 import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
-import { IteminService } from "../../services/IteminService"
+import { ItemoutService } from "../../services/ItemoutService"
 import { ItemService } from "../../services/ItemService"
 
 interface IState {
-  itemins: IItemin[]
+  itemouts: IItemout[]
   items: IItem[]
   loading: boolean
   error?: Error
@@ -29,85 +29,81 @@ const fields: IField[] = [
     label: "Jumlah",
     validations: ["required", "numeric"],
   },
-  {
-    name: "price",
-    label: "Harga Total",
-    validations: ["required", "numeric"],
-  },
 ]
 
-export default class Itemins extends Component<{}, IState> {
+export default class Itemouts extends Component<{}, IState> {
   [x: string]: any;
   public state: IState = {
-    itemins: [],
+    itemouts: [],
     items: [],
     loading: false,
   }
 
-  public iteminService = new IteminService()
+  public itemoutService = new ItemoutService()
   public itemService = new ItemService()
 
   public componentDidMount() {
-    this.getItemin()
+    this.getItemout()
     this.getItem()
   }
 
-  public getItem() {
-    this.itemService.get().then((items) => this.setState({ items }))
-  }
-
-  public getItemin() {
+  public getItemout() {
     this.setState({ loading: true })
-    this.iteminService
+    this.itemoutService
       .get()
-      .then((itemins) => this.setState({ itemins }))
+      .then((itemouts) => this.setState({ itemouts }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ loading: false }))
   }
 
-  public createItemin(input: IItemin) {
+  public getItem() {
+    // this.setState({ loading: true })
+    this.itemService.get().then((items) => this.setState({ items }))
+  }
+
+  public createItemout(input: IItemout) {
     this.setState({ loading: true })
-    this.iteminService
+    this.itemoutService
       .create(input)
-      .then(() => this.getItemin())
+      .then(() => this.getItemout())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public updateItemin(input: IItemin, id: string) {
+  public updateItemout(input: IItemout, id: string) {
     this.setState({ loading: true })
-    this.iteminService
+    this.itemoutService
       .update(input, id)
-      .then(() => this.getItemin())
+      .then(() => this.getItemout())
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public deleteItemin(id: string) {
+  public deleteItemout(id: string) {
     this.setState({ loading: true })
-    this.iteminService
+    this.itemoutService
       .delete(id)
-      .then(() => this.getItemin())
+      .then(() => this.getItemout())
       .catch((error) => this.setState({ error, loading: false }))
   }
   public setOptionsData() {
     fields[0].optionData!.data = this.state.items
   }
+
   public render() {
     this.setOptionsData()
-    // console.log(this.state.itemins)
     return (
       <Fragment>
-        <Header content="Item In" subheader="List of Item In data" />
+        <Header content="Item Out" subheader="List of Item Out data" />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}
         />
-        <DataTable<IItemin>
-          data={this.state.itemins}
+        <DataTable<IItemout>
+          data={this.state.itemouts}
           loading={this.state.loading}
           fields={fields}
-          onCreate={(input) => this.createItemin(input)}
-          onUpdate={(input) => this.updateItemin(input, input._id)}
-          onDelete={(input) => this.deleteItemin(input._id)}
+          onCreate={(input) => this.createItemout(input)}
+          onUpdate={(input) => this.updateItemout(input, input._id)}
+          onDelete={(input) => this.deleteItemout(input._id)}
         />
       </Fragment>
     )

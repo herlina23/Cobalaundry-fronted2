@@ -1,4 +1,6 @@
 import { Item } from "semantic-ui-react"
+import Dasadmin from "../pages/Das_admin"
+import Daskasir from "../pages/Das_kasir"
 import Detail from "../pages/Detail"
 import Diskon from "../pages/Diskon"
 import Items from "../pages/Item"
@@ -10,6 +12,8 @@ import Outcomes from "../pages/Outcome"
 import Outcomeins from "../pages/Outcomein"
 import Salary from "../pages/Salary"
 import Service from "../pages/Service"
+import ShowDetail from "../pages/Show_dtl"
+import ShowTransaction from "../pages/Show_trans"
 import Transaction from "../pages/Transaction"
 import User from "../pages/User"
 
@@ -111,6 +115,39 @@ const routes: IRoute[] = [
     icon: "money bill alternate outline",
     path: "/outcome",
     private: true,
+    role: ["admin", "kasir"],
+  },
+  {
+    component: Dasadmin,
+    label: "Dasboard Admin",
+    icon: "book",
+    path: "/das_admin",
+    private: true,
+    role: ["admin"],
+  },
+  {
+    component: Daskasir,
+    label: "Dasboard Kasir",
+    icon: "book",
+    path: "/das_kasir",
+    private: true,
+    role: ["kasir"],
+  },
+  {
+    component: ShowTransaction,
+    label: "Lihat Transaksi",
+    icon: "book",
+    path: "/show_trans",
+    private: true,
+    role: ["admin", "kasir"],
+  },
+  {
+    component: ShowDetail,
+    label: "Lihat Detail",
+    icon: "book",
+    path: "/show_trans/detail",
+    private: true,
+    hide: true,
     role: ["admin", "kasir"],
   },
   {

@@ -26,28 +26,12 @@ export default class InputDropdown extends Component<IProps> {
     return (
       <Fragment>
         <Label size="large" content={this.props.field.label} />
-        {/* <Dropdown
+        <Dropdown
           placeholder={"Pilih " + this.props.field.label}
           inline
           basic
           button
           floating
-          options={this.getOptions()}
-          value={this.getValue()}
-          onChange={(event, { value }) => this.props.onChange(value)}
-          disabled={this.props.readOnly}
-        /> */}
-        <Dropdown
-          placeholder={"Pilih " + this.props.field.label}
-          // inline
-          // basic
-          // button
-          // floating
-          // clearable
-          // fluid
-          // multiple
-          search
-          selection
           options={this.getOptions()}
           value={this.getValue()}
           onChange={(event, { value }) => this.props.onChange(value)}

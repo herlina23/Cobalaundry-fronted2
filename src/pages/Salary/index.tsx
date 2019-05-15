@@ -14,27 +14,27 @@ interface IState {
 
 const fields: IField[] = [
   {
-    name: "employee",
+    name: "user",
     label: "Nama Pegawai",
     type: "option",
     validations: ["required"],
     optionData: {
       data: [],
-      textKey: "username",
+      textKey: "name",
       valueKey: "_id",
     },
   },
-  {
-    name: "user",
-    label: "Username",
-    type: "option",
-    optionData: {
-      data: [],
-      textKey: "username",
-      valueKey: "_id",
-    },
-    hideForm: true,
-  },
+  // {
+  //   name: "user",
+  //   label: "Username",
+  //   type: "option",
+  //   optionData: {
+  //     data: [],
+  //     textKey: "username",
+  //     valueKey: "_id",
+  //   },
+  //   hideForm: true,
+  // },
   {
     name: "total",
     label: "Total Gaji",
@@ -100,7 +100,7 @@ export default class Salary extends Component<{}, IState> {
     this.setOptionsData()
     return (
       <Fragment>
-        <Header content="Salary" subheader="List of salary data" />
+        <Header content="Gaji Karyawan" subheader="Daftar Gaji Karyawan" />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

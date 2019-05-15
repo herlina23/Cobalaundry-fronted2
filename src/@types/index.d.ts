@@ -59,6 +59,7 @@ declare interface IUser {
   username: string
   password: string
   role: string
+  name: string
 }
 declare interface IItem {
   _id: string
@@ -74,20 +75,20 @@ declare interface IItemin {
 }
 declare interface IItemout {
   _id: string
-  item_name: string
+  item?: IItem | string
   qty: number
 }
-declare interface IItemout {
-  _id: string
-  item_name: string
-  qty: number
-}
+// declare interface IItemout {
+//   _id: string
+//   item_name: string
+//   qty: number
+// }
 
 declare interface ISalary {
   _id: string
-  emloyee?: IUser | string
-  user: IUser | string
-  // employee: string
+  // emloyee?: IUser | string
+  // user: IUser | string
+  user?: IUser | string
   total: number
 }
 
@@ -130,6 +131,46 @@ declare interface IOutcome {
   outcomein?: IOutcomein | string
   total: number
   user: IUser | string
+  unit: string
+  qty: number
+}
+
+declare interface IDas_admin {
+  // _id: string
+  // outcomein?: IOutcomein | string
+  // total: number
+  // user: IUser | string
+}
+
+declare interface IDas_kasir {
+  // _id: string
+  // outcomein?: IOutcomein | string
+  // total: number
+  // user: IUser | string
+}
+
+declare interface IShowtrans {
+  _id: string
+  invoice: string
+  dateIn: date
+  dateOut: date
+  discount: number
+  total: number
+  grandTotal: number
+  status?: IStatus | string
+  recepient: string
+  member?: IMember | number
+  member?: IMember | number
+  user: IUser | string
+  detail: string[]
+}
+
+declare interface IShowdtl {
+  _id: string
+  process?: IProcess | string
+  transaction?: IShowdtl | string
+  service?: IService | string
+  qty: number
 }
 
 declare interface IAppContext {
