@@ -12,8 +12,7 @@ import Outcomes from "../pages/Outcome"
 import Outcomeins from "../pages/Outcomein"
 import Salary from "../pages/Salary"
 import Service from "../pages/Service"
-import ShowDetail from "../pages/Show_dtl"
-import ShowTransaction from "../pages/Show_trans"
+
 import Transaction from "../pages/Transaction"
 import TransactionNew from "../pages/Transaction_new"
 import User from "../pages/User"
@@ -143,23 +142,7 @@ const routes: IRoute[] = [
     private: true,
     role: ["kasir"],
   },
-  {
-    component: ShowTransaction,
-    label: "Lihat Transaksi",
-    icon: "book",
-    path: "/show_trans",
-    private: true,
-    role: ["admin", "kasir"],
-  },
-  {
-    component: ShowDetail,
-    label: "Lihat Detail",
-    icon: "book",
-    path: "/show_trans/detail",
-    private: true,
-    hide: true,
-    role: ["admin", "kasir"],
-  },
+
   {
     component: Login,
     path: "/login",
