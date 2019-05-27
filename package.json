@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/bson": "^4.0.0",
     "@types/validator": "^10.9.0",
     "axios": "^0.18.0",
+    "bson": "^4.0.2",
     "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

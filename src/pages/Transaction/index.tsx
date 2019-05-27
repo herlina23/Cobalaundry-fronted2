@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { Link } from "react-router-dom"
 import { Button, Header } from "semantic-ui-react"
-import DataTable from "../../components/DataTable"
+import DataTable from "../../components/DataTable2"
 import ErrorMessage from "../../components/ErrorMessage"
 import { MemberService } from "../../services/MemberService"
 import { StatusService } from "../../services/StatusService"
@@ -98,7 +98,7 @@ const fields: IField[] = [
 ]
 
 export default class Transaction extends Component<{}, IState> {
-  [x: string]: any;
+  [x: string]: any
   public state: IState = {
     transaction: [],
     members: [],
@@ -187,6 +187,10 @@ export default class Transaction extends Component<{}, IState> {
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}
         />
+
+        <Link to={`/transaction/new`}>
+          <Button content="Tambah" color="green" />
+        </Link>
         <DataTable<ITransaction>
           data={this.state.transaction}
           loading={this.state.loading}

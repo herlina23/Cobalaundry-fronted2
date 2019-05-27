@@ -102,7 +102,7 @@ declare interface ITransaction {
   grandTotal: number
   status?: IStatus | string
   recepient: string
-  member?: IMember | number
+  member?: IMember | string
   user: IUser | string
   detail: string[]
 }
@@ -159,8 +159,7 @@ declare interface IShowtrans {
   grandTotal: number
   status?: IStatus | string
   recepient: string
-  member?: IMember | number
-  member?: IMember | number
+  member?: IMember | string
   user: IUser | string
   detail: string[]
 }

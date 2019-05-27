@@ -15,6 +15,7 @@ import Service from "../pages/Service"
 import ShowDetail from "../pages/Show_dtl"
 import ShowTransaction from "../pages/Show_trans"
 import Transaction from "../pages/Transaction"
+import TransactionNew from "../pages/Transaction_new"
 import User from "../pages/User"
 
 const routes: IRoute[] = [
@@ -87,6 +88,14 @@ const routes: IRoute[] = [
     label: "Transaksi",
     icon: "clipboard list",
     path: "/transaction",
+    private: true,
+    role: ["admin", "kasir"],
+  },
+  {
+    component: TransactionNew,
+    label: "Transaksi Baru",
+    icon: "clipboard list",
+    path: "/transaction/new",
     private: true,
     role: ["admin", "kasir"],
   },

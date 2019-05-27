@@ -22,6 +22,20 @@ export default class InputDropdown extends Component<IProps> {
     }))
   }
 
+  public getObjectValue(
+    value:
+      | string
+      | number
+      | boolean
+      | Array<string | number | boolean>
+      | undefined,
+  ) {
+    const { optionData } = this.props.field
+    return optionData!.data.filter(
+      (item) => item[optionData!.valueKey] === value,
+    )[0]
+  }
+
   public render() {
     return (
       <Fragment>
@@ -50,7 +64,8 @@ export default class InputDropdown extends Component<IProps> {
           selection
           options={this.getOptions()}
           value={this.getValue()}
-          onChange={(event, { value }) => this.props.onChange(value)}
+          onChange={(event, { value }) =>
+            this.props.onChange(this.getObjectValue(value))}
           disabled={this.props.readOnly}
         />
       </Fragment>

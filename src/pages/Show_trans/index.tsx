@@ -112,7 +112,7 @@ const fields: IField[] = [
 ]
 
 export default class ShowTransaction extends Component<{}, IState> {
-  [x: string]: any;
+  [x: string]: any
   public state: IState = {
     transaction: [],
     members: [],
@@ -172,7 +172,7 @@ export default class ShowTransaction extends Component<{}, IState> {
 
   public renderAdditionalAction(transaction: IShowtrans) {
     return transaction._id ? (
-        <Link to={`/show_trans/detail`}>
+      <Link to={`/show_trans/detail`}>
         <Button
           content="Detail"
           color="orange"
