@@ -23,7 +23,9 @@ interface IState {
 class App extends Component {
   public state: IState = {
     token: localStorage.getItem("authToken") || "",
-    user: null,
+    user: localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user")!)
+      : null,
   }
 
   public setToken = (token: string) => {
@@ -33,6 +35,7 @@ class App extends Component {
 
   public setUser = (user: IUser) => {
     this.setState({ user })
+    localStorage.setItem("user", JSON.stringify(user))
   }
 
   public isLoggedIn = () => {

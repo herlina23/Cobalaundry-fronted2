@@ -25,11 +25,13 @@ const fields: IField[] = [
   {
     name: "dateIn",
     label: "Tgl Masuk",
+    type: "date",
     // validations: ["required"],
     hideForm: true,
   },
   {
     name: "dateOut",
+    type: "date",
     label: "Tgl Ambil",
     // validations: ["required"],
     hideForm: true,

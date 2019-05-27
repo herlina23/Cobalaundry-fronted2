@@ -128,19 +128,17 @@ export default class TransactionNew extends Component<{}, IState> {
   }
 
   public submit() {
-    const detail = this.state.details.map((item) => item._id)
     const inputTransaction = {
+      _id: new ObjectID().toHexString(),
       member: this.state.member,
       status: this.state.status,
       recepient: "",
-      detail,
     } as ITransaction
 
     this.transactionService.create(inputTransaction).then(() => {
       this.state.details.forEach((item) => {
-        this.detailService.create(item).then(() => {
-          console.log("success")
-        })
+        item.transaction = inputTransaction._id
+        this.detailService.create(item)
       })
     })
   }
