@@ -97,6 +97,7 @@ const routes: IRoute[] = [
     icon: "clipboard list",
     path: "/transaction/new",
     private: true,
+    hide: true,
     role: ["admin", "kasir"],
   },
   {
