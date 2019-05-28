@@ -1,14 +1,7 @@
 import { ObjectID } from "bson"
 import React, { Component, Fragment } from "react"
-import {
-  Button,
-  Divider,
-  Dropdown,
-  DropdownItemProps,
-  Header,
-  Input,
-  Label,
-} from "semantic-ui-react"
+import { Route, RouteComponentProps } from "react-router-dom"
+import { Button, Divider, Dropdown, Header, Label } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { DetailService } from "../../services/DetailService"
@@ -59,7 +52,10 @@ const fields: IField[] = [
     validations: ["required", "numeric"],
   },
 ]
-export default class TransactionNew extends Component<{}, IState> {
+export default class TransactionNew extends Component<
+  RouteComponentProps,
+  IState
+> {
   [x: string]: any
   public state: IState = {
     details: [],
@@ -129,16 +125,21 @@ export default class TransactionNew extends Component<{}, IState> {
 
   public submit() {
     const inputTransaction = {
-      _id: new ObjectID().toHexString(),
       member: this.state.member,
       status: this.state.status,
       recepient: "",
     } as ITransaction
 
-    this.transactionService.create(inputTransaction).then(() => {
-      this.state.details.forEach((item) => {
-        item.transaction = inputTransaction._id
-        this.detailService.create(item)
+    this.setState({ loading: true })
+    this.transactionService.create(inputTransaction).then((trans) => {
+      this.state.details.forEach((item, index) => {
+        item.transaction = trans._id
+        this.detailService.create(item).then(() => {
+          if (index === this.state.details.length - 1) {
+            this.setState({ loading: false })
+            this.props.history.push("/transaction")
+          }
+        })
       })
     })
   }

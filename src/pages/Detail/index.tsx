@@ -68,7 +68,7 @@ const fields: IField[] = [
 
 // export default class Idetails extends Component<{}, IState> {
 export default class Detail extends Component<{}, IState> {
-  [x: string]: any;
+  [x: string]: any
   public state: IState = {
     details: [],
     transaction: [],
@@ -137,18 +137,12 @@ export default class Detail extends Component<{}, IState> {
 
   public setOptionsData() {
     fields[0].optionData!.data = this.state.transaction
-  }
-  public setOptionsData2() {
     fields[1].optionData!.data = this.state.services
-  }
-  public setOptionsData3() {
     fields[2].optionData!.data = this.state.processs
   }
 
   public render() {
     this.setOptionsData()
-    this.setOptionsData2()
-    this.setOptionsData3()
     return (
       <Fragment>
         <Header content="Detail" subheader="List of Detail data" />

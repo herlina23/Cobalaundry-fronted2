@@ -16,8 +16,6 @@ export class DetailService extends ServiceGenerator<IDetail> {
   }
 
   public create(input: IDetail) {
-    const { _id } = JSON.parse(localStorage.getItem("transaction")!)
-    input.transaction = _id
     return new Promise<IDetail>((resolve, reject) => {
       axios
         .post(this.endpoint, input, { headers: this.getHeader() })
