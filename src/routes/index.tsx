@@ -13,6 +13,7 @@ import Outcomeins from "../pages/Outcomein"
 import Salary from "../pages/Salary"
 import Service from "../pages/Service"
 
+import TestBeta from "../pages/Struk"
 import Transaction from "../pages/Transaction"
 import TransactionNew from "../pages/Transaction_new"
 import User from "../pages/User"
@@ -99,6 +100,16 @@ const routes: IRoute[] = [
     hide: true,
     role: ["admin", "kasir"],
   },
+  {
+    component: TestBeta,
+    label: "Transaksi Baru",
+    icon: "clipboard list",
+    path: "/transaction/struk",
+    private: true,
+    hide: true,
+    role: ["admin", "kasir"],
+  },
+
   {
     component: Detail,
     label: "Detail Transaksi",
