@@ -160,15 +160,26 @@ export default class Transaction extends Component<{}, IState> {
 
   public renderAdditionalAction(transaction: ITransaction) {
     return transaction._id ? (
-      <Link to={`/transaction/detail`}>
-        <Button
-          content="Detail"
-          color="orange"
-          onClick={() =>
-            localStorage.setItem("transaction", JSON.stringify(transaction))
-          }
-        />
-      </Link>
+      <Fragment>
+        <Link to={`/transaction/detail`}>
+          <Button
+            content="Detail"
+            color="orange"
+            onClick={() =>
+              localStorage.setItem("transaction", JSON.stringify(transaction))
+            }
+          />
+        </Link>
+        <Link to={`/transaction/struk`}>
+          <Button
+            content="Struk"
+            color="purple"
+            onClick={() =>
+              localStorage.setItem("transaction", JSON.stringify(transaction))
+            }
+          />
+        </Link>
+      </Fragment>
     ) : null
   }
 
