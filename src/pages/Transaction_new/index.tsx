@@ -184,10 +184,6 @@ export default class TransactionNew extends Component<
           value={this.state.status}
           onChange={(event, { value }) => this.changeStatus(value as string)}
         />
-        &nbsp; &nbsp;
-        <Button color="blue" onClick={() => this.submit()}>
-          Simpan
-        </Button>
         <Divider />
         <Header content="Detail Transaksi" />
         <DataTable<IDetail>
@@ -198,6 +194,9 @@ export default class TransactionNew extends Component<
           onUpdate={(input) => this.updateDetail(input, input._id)}
           onDelete={(input) => this.deleteDetail(input._id)}
         />
+        <Button color="blue" onClick={() => this.submit()}>
+          Simpan
+        </Button>
       </Fragment>
     )
   }
