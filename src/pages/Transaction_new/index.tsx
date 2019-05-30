@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react"
 import { Route, RouteComponentProps } from "react-router-dom"
 import { Button, Divider, Dropdown, Header, Label } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
+import Form from "../../components/DataTable/Form"
 import ErrorMessage from "../../components/ErrorMessage"
 import { DetailService } from "../../services/DetailService"
 import { MemberService } from "../../services/MemberService"
@@ -21,6 +22,7 @@ interface IState {
   status: string
   loading: boolean
   error?: Error
+  isFormOpen: boolean
 }
 
 const fields: IField[] = [
@@ -52,6 +54,25 @@ const fields: IField[] = [
     validations: ["required", "numeric"],
   },
 ]
+
+const memberFields: IField[] = [
+  {
+    name: "member_name",
+    label: "Nama Member",
+    validations: ["required"],
+  },
+  {
+    name: "phone",
+    label: "Telepon",
+    validations: ["required", "numeric"],
+  },
+  {
+    name: "address",
+    label: "Alamat",
+    validations: ["required"],
+  },
+]
+
 export default class TransactionNew extends Component<
   RouteComponentProps,
   IState
@@ -66,6 +87,7 @@ export default class TransactionNew extends Component<
     member: "",
     status: "",
     loading: false,
+    isFormOpen: false,
   }
 
   public detailService = new DetailService()
@@ -92,6 +114,14 @@ export default class TransactionNew extends Component<
   public getMember() {
     this.memberService.get().then((members) => this.setState({ members }))
   }
+
+  public createMember(input: IMember) {
+    this.memberService
+      .create(input)
+      .then(() => this.getMember())
+      .catch((error) => this.setState({ error }))
+  }
+
   public getStatus() {
     this.statusService.get().then((statuss) => this.setState({ statuss }))
   }
@@ -173,6 +203,10 @@ export default class TransactionNew extends Component<
           options={this.getOptions(this.state.members, "member_name", "_id")}
           value={this.state.member}
           onChange={(event, { value }) => this.changeMember(value as string)}
+          noResultsMessage={
+            <Button onClick={() => this.setState({ isFormOpen: true })}>
+              Tambah Member
+            </Button>}
         />
         &nbsp; &nbsp;
         <Label size="large" content="Status" />
@@ -197,6 +231,13 @@ export default class TransactionNew extends Component<
         <Button color="blue" onClick={() => this.submit()}>
           Simpan
         </Button>
+        <Form
+          initialInput={{}}
+          fields={memberFields}
+          open={this.state.isFormOpen}
+          onClose={() => this.setState({ isFormOpen: false })}
+          onCreate={(input) => this.createMember(input)}
+        />
       </Fragment>
     )
   }
