@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 
-import ReactDOM from "react-dom";
-import axios from "axios";
+import ReactDOM from 'react-dom'
+import axios from 'axios'
 import {
   Grid,
   Segment,
@@ -9,37 +9,33 @@ import {
   Container,
   Header,
   List
-} from "semantic-ui-react";
+} from 'semantic-ui-react'
 
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 
 // resp.data = menampilkan data transaksi
 // resp.repos = menampilkan data detail transaksi
 
-const username = "E3QOSmMbn";
 function App() {
-  const [resp, setGitData] = useState({ data: [], repos: [] });
+  const [resp, setGitData] = useState({ data: [], repos: [] })
 
   useEffect(() => {
+    const username = JSON.parse(localStorage.getItem('transaction')).invoice
+
     const fetchData = async () => {
       const respGlobal = await axios(
         `https://laundry-microservice-transact.herokuapp.com/api/v1/transactions/search/${username}`
-      );
+      )
       const respRepos = await axios(
         `https://laundry-microservice-transact.herokuapp.com/api/v1/details/search/${username}`
-      );
+      )
 
-      setGitData({ data: respGlobal.data, repos: respRepos.data });
-    };
+      setGitData({ data: respGlobal.data, repos: respRepos.data })
+    }
 
-    fetchData();
-  }, []);
-
-  console.log("render");
-  if (resp.data) {
-    console.log("d", resp.data, resp.repos);
-  }
+    fetchData()
+  }, [])
   return (
     <div>
       <div className="mb5">
@@ -49,11 +45,11 @@ function App() {
         id="divToPrint"
         className="mt4"
         {...{
-          backgroundColor: "#f5f5f5",
-          width: "210mm",
-          minHeight: "297mm",
-          marginLeft: "auto",
-          marginRight: "auto"
+          backgroundColor: '#f5f5f5',
+          width: '210mm',
+          minHeight: '297mm',
+          marginLeft: 'auto',
+          marginRight: 'auto'
         }}
       >
         <div>
@@ -140,14 +136,14 @@ function App() {
                                 {rp.qty} {rp.service.unit}
                               </Table.Cell>
                               <Table.Cell>
-                                Rp{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
+                                Rp{' '}
+                                {new Intl.NumberFormat(['ban', 'id']).format(
                                   rp.service.tarif
                                 )}
                               </Table.Cell>
                               <Table.Cell>
-                                Rp{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
+                                Rp{' '}
+                                {new Intl.NumberFormat(['ban', 'id']).format(
                                   resp.repos.reduce(
                                     (sum, idx) =>
                                       (sum = idx.qty * idx.service.tarif),
@@ -167,8 +163,8 @@ function App() {
                               <Table.Cell />
                               <Table.Cell>Total</Table.Cell>
                               <Table.Cell>
-                                Rp{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
+                                Rp{' '}
+                                {new Intl.NumberFormat(['ban', 'id']).format(
                                   dt.total
                                 )}
                               </Table.Cell>
@@ -196,8 +192,8 @@ function App() {
                               <Table.Cell />
                               <Table.Cell active>Grand Total</Table.Cell>
                               <Table.Cell active>
-                                Rp{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
+                                Rp{' '}
+                                {new Intl.NumberFormat(['ban', 'id']).format(
                                   dt.grandTotal
                                 )}
                               </Table.Cell>
@@ -212,7 +208,7 @@ function App() {
                           <List.Header>
                             Jangan lupa cek proses laundry-mu!
                           </List.Header>
-                          {"< link buat cek proses laundry member>"}
+                          {'< link buat cek proses laundry member>'}
                         </List.Item>
                         <List.Item>
                           Masukkan kode invoice pada kolom pencarian, kemudian
@@ -235,21 +231,21 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function printDocument() {
-  const input = document.getElementById("divToPrint");
+  const input = document.getElementById('divToPrint')
   html2canvas(input).then(canvas => {
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF();
-    pdf.addImage(imgData, "JPEG", 0, 0);
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF()
+    pdf.addImage(imgData, 'JPEG', 0, 0)
     // pdf.output('dataurlnewwindow');
-    pdf.save("Struk.pdf");
-  });
+    pdf.save('Struk.pdf')
+  })
 }
 
-export default App;
+export default App
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
