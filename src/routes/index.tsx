@@ -13,6 +13,7 @@ import Outcomeins from "../pages/Outcomein"
 import Salary from "../pages/Salary"
 import Service from "../pages/Service"
 
+import Mreports from "../pages/Mreport"
 import App from "../pages/Struk"
 import Transaction from "../pages/Transaction"
 import TransactionNew from "../pages/Transaction_new"
@@ -102,11 +103,11 @@ const routes: IRoute[] = [
   },
   {
     component: App,
-    label: "Transaksi Baru",
+    label: "Struk",
     icon: "clipboard list",
     path: "/transaction/struk",
     private: true,
-    hide: true,
+    // hide: true,
     role: ["admin", "kasir"],
   },
 
@@ -152,6 +153,15 @@ const routes: IRoute[] = [
     path: "/das_kasir",
     private: true,
     role: ["kasir"],
+  },
+
+  {
+    component: Mreports,
+    label: "Laporan",
+    icon: "book",
+    path: "/laporan",
+    private: true,
+    role: ["admin"],
   },
 
   {
