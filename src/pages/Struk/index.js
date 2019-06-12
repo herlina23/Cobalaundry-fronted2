@@ -21,8 +21,8 @@ function App() {
   const [resp, setGitData] = useState({ data: [], repos: [] });
 
   useEffect(() => {
-    // const username = JSON.parse(localStorage.getItem("transaction")).invoice;
-    const username = JSON.parse(localStorage.getItem("transaction"));
+    const username = JSON.parse(localStorage.getItem("transaction")).invoice;
+    // const username = JSON.parse(localStorage.getItem("transaction"));
 
     const fetchData = async () => {
       const respGlobal = await axios(
