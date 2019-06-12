@@ -23,6 +23,9 @@ export default class Login extends Component<RouteComponentProps, IState> {
 
   public loginService = new LoginService()
 
+  // public redirectIfAuthenticated(isLoggedIn: boolean) {
+  //   if (isLoggedIn) this.props.history.push("/")
+  // }
   public redirectIfAuthenticated(isLoggedIn: boolean) {
     if (isLoggedIn) this.props.history.push("/")
   }

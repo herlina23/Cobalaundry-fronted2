@@ -77,7 +77,7 @@ export default class TransactionNew extends Component<
   RouteComponentProps,
   IState
 > {
-  [x: string]: any
+  [x: string]: any;
   public state: IState = {
     details: [],
     services: [],
@@ -157,7 +157,7 @@ export default class TransactionNew extends Component<
     const inputTransaction = {
       member: this.state.member,
       status: this.state.status,
-      recepient: "",
+      // recepient: "",
     } as ITransaction
 
     this.setState({ loading: true })

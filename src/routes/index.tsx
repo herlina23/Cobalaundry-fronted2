@@ -1,6 +1,6 @@
 import { Item } from "semantic-ui-react"
-import Dasadmin from "../pages/Das_admin"
-import Daskasir from "../pages/Das_kasir"
+import Dasadmin from "../pages/Das_admin/index"
+import Daskasir from "../pages/Das_kasir/index"
 import Detail from "../pages/Detail"
 import Diskon from "../pages/Diskon"
 import Items from "../pages/Item"
@@ -20,6 +20,22 @@ import TransactionNew from "../pages/Transaction_new"
 import User from "../pages/User"
 
 const routes: IRoute[] = [
+  {
+    component: Dasadmin,
+    label: "Dasboard Admin",
+    icon: "book",
+    path: "/dashboard_admin",
+    private: true,
+    role: ["admin"],
+  },
+  {
+    component: Daskasir,
+    label: "Dasboard Kasir",
+    icon: "book",
+    path: "/dashboard_kasir",
+    private: true,
+    role: ["kasir"],
+  },
   {
     component: Member,
     label: "Member",
@@ -107,7 +123,7 @@ const routes: IRoute[] = [
     icon: "clipboard list",
     path: "/transaction/struk",
     private: true,
-    // hide: true,
+    hide: true,
     role: ["admin", "kasir"],
   },
 
@@ -137,22 +153,6 @@ const routes: IRoute[] = [
     path: "/outcome",
     private: true,
     role: ["admin", "kasir"],
-  },
-  {
-    component: Dasadmin,
-    label: "Dasboard Admin",
-    icon: "book",
-    path: "/das_admin",
-    private: true,
-    role: ["admin"],
-  },
-  {
-    component: Daskasir,
-    label: "Dasboard Kasir",
-    icon: "book",
-    path: "/das_kasir",
-    private: true,
-    role: ["kasir"],
   },
 
   {

@@ -101,7 +101,7 @@ declare interface ITransaction {
   total: number
   grandTotal: number
   status?: IStatus | string
-  recepient: string
+  // recepient: string
   member?: IMember | string
   user: IUser | string
   detail: string[]

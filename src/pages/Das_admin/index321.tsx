@@ -8,7 +8,7 @@ interface IState {
   mem: IMember[]
 }
 
-export default class Daskasir extends Component<{}, IState> {
+export default class Dasadmin321 extends Component<{}, IState> {
   public state: IState = {
     trans: [],
     mem: [],
@@ -45,7 +45,7 @@ export default class Daskasir extends Component<{}, IState> {
             link
             icon="pencil"
             color="red"
-            header="Cucian Baru"
+            header="Jumlah Transaksi"
             meta="Total Keseluruhan Transaksi"
             description={this.state.trans.length}
           />
@@ -53,7 +53,7 @@ export default class Daskasir extends Component<{}, IState> {
             link
             icon="pencil"
             color="red"
-            header="Cucian Kering"
+            header="Jumlah Transaksi"
             meta="Total Keseluruhan Transaksi"
             description={this.state.trans.length}
           />
@@ -61,7 +61,7 @@ export default class Daskasir extends Component<{}, IState> {
             link
             icon="pencil"
             color="red"
-            header="Cucian Disetrika"
+            header="Jumlah Transaksi"
             meta="Total Keseluruhan Transaksi"
             description={this.state.trans.length}
           />
@@ -71,16 +71,16 @@ export default class Daskasir extends Component<{}, IState> {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Tanggal</Table.HeaderCell>
-              <Table.HeaderCell>Lunas</Table.HeaderCell>
-              <Table.HeaderCell>Terhutang</Table.HeaderCell>
+              <Table.HeaderCell>Pemasukan</Table.HeaderCell>
+              <Table.HeaderCell>Pengeluaran</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
             <Table.Row>
               <Table.Cell>2019-5-8</Table.Cell>
-              <Table.Cell>10</Table.Cell>
-              <Table.Cell>5</Table.Cell>
+              <Table.Cell>100000</Table.Cell>
+              <Table.Cell>50000</Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>

@@ -76,11 +76,11 @@ const fields: IField[] = [
     // validations: ["required"],
     hideForm: true,
   },
-  {
-    name: "recipient",
-    label: "Penerima",
-    // validations: ["required"],
-  },
+  // {
+  //   name: "recipient",
+  //   label: "Penerima",
+  //   // validations: ["required"],
+  // },
   // {
   //   name: "paymentStatus",
   //   label: "Status Bayar",
@@ -100,7 +100,7 @@ const fields: IField[] = [
 ]
 
 export default class Transaction extends Component<{}, IState> {
-  [x: string]: any
+  [x: string]: any;
   public state: IState = {
     transaction: [],
     members: [],
@@ -187,7 +187,8 @@ export default class Transaction extends Component<{}, IState> {
     fields[3].optionData!.data = this.state.members
   }
   public setOptionsData2() {
-    fields[9].optionData!.data = this.state.statuss
+    fields[8
+    ].optionData!.data = this.state.statuss
   }
 
   public render() {

@@ -1,4 +1,4 @@
-Community crew monitoring for tracking activity of crew
+Sistem Informasi Manajemen Laundry
 
 ## Available Scripts
 
