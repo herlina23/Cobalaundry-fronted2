@@ -13,6 +13,7 @@ import Outcomeins from "../pages/Outcomein"
 import Salary from "../pages/Salary"
 import Service from "../pages/Service"
 
+import Dreports from "../pages/Dreport"
 import Mreports from "../pages/Mreport"
 import App from "../pages/Struk"
 import Transaction from "../pages/Transaction"
@@ -162,6 +163,16 @@ const routes: IRoute[] = [
     path: "/laporan",
     private: true,
     role: ["admin"],
+  },
+
+  {
+    component: Dreports,
+    label: "Laporan Harian",
+    icon: "book",
+    path: "/laporan_harian",
+    private: true,
+    role: ["admin"],
+    hide: true,
   },
 
   {

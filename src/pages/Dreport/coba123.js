@@ -29,6 +29,7 @@ export default class Dreports extends React.Component {
       totaloutcome: [],
       totalitem: [],
       totalsalary: [],
+      pengeluaran: [],
 
       datein: new Date(),
       dateout: new Date()
@@ -70,17 +71,23 @@ export default class Dreports extends React.Component {
         `https://laundry-microservice-users.herokuapp.com/api/v1/dreports_new/pemasukan?dateIn=${
           this.state.datein
         }&dateOut=${this.state.dateout}`
+      ),
+      axios.get(
+        `https://laundry-microservice-users.herokuapp.com/api/v1/dreports3/pengeluaran?dateIn=${
+          this.state.datein
+        }&dateOut=${this.state.dateout}`
       )
     ])
-      .then(([res1, res2, res3, res4]) =>
-        Promise.all([res1.data, res2.data, res3.data, res4.data])
+      .then(([res1, res2, res3, res4, res5]) =>
+        Promise.all([res1.data, res2.data, res3.data, res4.data, res5.data])
       )
-      .then(([data1, data2, data3, data4]) =>
+      .then(([data1, data2, data3, data4, data5]) =>
         this.setState({
           outcome2: data1,
           salary: data2,
           item: data3,
-          pemasukan: data4
+          pemasukan: data4,
+          pengeluaran: data5
         })
       );
   }
@@ -105,8 +112,8 @@ export default class Dreports extends React.Component {
 
     return (
       <div>
-        <br />
-        <br />
+        {/* <br /> */}
+        {/* <br /> */}
         <Container text>
           <Header as="h2" textAlign="center">
             Laporan
@@ -292,7 +299,9 @@ export default class Dreports extends React.Component {
                                 ))}
 
                                 <Table.Row>
-                                  <Table.Cell />
+                                  <Table.Cell>
+                                    laba: {this.state.pengeluaran.laba}
+                                  </Table.Cell>
                                   <Table.Cell />
                                   <Table.Cell />
                                   <Table.Cell />

@@ -3,6 +3,7 @@ import { Header } from "semantic-ui-react"
 import DataTable from "../../components/DataTable"
 import ErrorMessage from "../../components/ErrorMessage"
 import { ItemService } from "../../services/ItemService"
+import { Link } from "react-router-dom";
 
 interface IState {
   items: IItem[]
@@ -75,6 +76,7 @@ export default class Items extends Component<{}, IState> {
   }
 
   public render() {
+    
     return (
       <Fragment>
         <Header content="Item" subheader="List of Item data" />

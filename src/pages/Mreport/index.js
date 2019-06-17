@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Grid,
@@ -25,6 +26,7 @@ export default class Mreports extends React.Component {
       totaloutcome: [],
       totalitem: [],
       totalsalary: [],
+      pengeluaran: [],
       method: "5"
     };
 
@@ -79,9 +81,14 @@ export default class Mreports extends React.Component {
         `https://laundry-microservice-users.herokuapp.com/api/v1/mreports/salary?m=${
           this.state.method
         }&y=${this.state.value}`
+      ),
+      axios.get(
+        `https://laundry-microservice-users.herokuapp.com/api/v1/mreports3/pengeluaran?m=${
+          this.state.method
+        }&y=${this.state.value}`
       )
     ])
-      .then(([res1, res2, res3, res4, res5, res6, res7]) =>
+      .then(([res1, res2, res3, res4, res5, res6, res7, res8]) =>
         Promise.all([
           res1.data,
           res2.data,
@@ -89,10 +96,11 @@ export default class Mreports extends React.Component {
           res4.data,
           res5.data,
           res6.data,
-          res7.data
+          res7.data,
+          res8.data
         ])
       )
-      .then(([data1, data2, data3, data4, data5, data6, data7]) =>
+      .then(([data1, data2, data3, data4, data5, data6, data7, data8]) =>
         this.setState({
           outcome2: data1,
           salary: data2,
@@ -100,7 +108,8 @@ export default class Mreports extends React.Component {
           pemasukan: data4,
           totaloutcome: data5,
           totalitem: data6,
-          totalsalary: data7
+          totalsalary: data7,
+          pengeluaran: data8
         })
       );
   }
@@ -121,16 +130,26 @@ export default class Mreports extends React.Component {
     console.log("item: ", this.state.item);
     console.log("outcome: ", this.state.outcome);
     console.log("pemasukan: ", this.state.pemasukan);
-    console.log("mreport: ", this.state.mreport);
+    console.log("laba: ", this.state.pengeluaran.laba);
 
     return (
       <div>
         <br />
         <br />
         <Container text>
+          <p>
+            <Link to={`/laporan_harian`}>
+              <Button content="Laporan Harian" color="orange" />
+            </Link>
+
+            <Link to={`/laporan`}>
+              <Button content="Laporan Bulanan" color="violet" />
+            </Link>
+          </p>
           <Header as="h2" textAlign="center">
-            Laporan
+            Laporan Bulanan
           </Header>
+
           <p>
             <Form>
               <Input
@@ -194,7 +213,7 @@ export default class Mreports extends React.Component {
             <div>
               <p>
                 <div className="mb5">
-                  <button onClick={this.printDocument}>Print</button>
+                  <Button onClick={this.printDocument}>Print</Button>
                 </div>
                 <div
                   id="divToPrint"
@@ -396,14 +415,26 @@ export default class Mreports extends React.Component {
                                   </Table.Cell>
                                   <Table.Cell />
                                   <Table.Cell />
-                                  <Table.Cell />
+                                  <Table.Cell>
+                                    Rp{" "}
+                                    {new Intl.NumberFormat([
+                                      "ban",
+                                      "id"
+                                    ]).format(this.state.pengeluaran.keluar)}
+                                  </Table.Cell>
                                 </Table.Row>
                                 <Table.Row active>
                                   <Table.Cell>Laba</Table.Cell>
                                   <Table.Cell />
                                   <Table.Cell />
                                   <Table.Cell />
-                                  <Table.Cell />
+                                  <Table.Cell>
+                                    Rp{" "}
+                                    {new Intl.NumberFormat([
+                                      "ban",
+                                      "id"
+                                    ]).format(this.state.pengeluaran.laba)}
+                                  </Table.Cell>
                                 </Table.Row>
                               </Table.Body>
                             </Table>
