@@ -26,7 +26,7 @@ function App() {
 
     const fetchData = async () => {
       const respGlobal = await axios(
-        `https://laundry-microservice-transact.herokuapp.com/api/v1/transactions/search/${username}`
+        `https://laundry-microservice-users.herokuapp.com/api/v1/trans/trans?i=${username}`
       );
       // const respRepos = await axios(
       //   `https://laundry-microservice-transact.herokuapp.com/api/v1/details/search/${username}`
@@ -112,13 +112,15 @@ function App() {
                               <List>
                                 <List.Item>
                                   <List.Header>Tanggal Masuk</List.Header>
-                                  {dt.dateIn}
+                                  {dt.day1}-{dt.month1}-{dt.year1} {dt.hour1}
+                                  {":"}
+                                  {dt.minute1}
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>
                                     Perkiraan Pengambilan
                                   </List.Header>
-                                  {dt.dateOut}
+                                  {dt.day2}-{dt.month2}-{dt.year2}
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Kasir</List.Header>
