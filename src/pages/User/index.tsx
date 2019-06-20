@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react"
 import { Header } from "semantic-ui-react"
-import DataTable from "../../components/DataTable"
+import DataTable from "../../components/DataTable4"
 import ErrorMessage from "../../components/ErrorMessage"
 import { UserService } from "../../services/UserService"
 
@@ -64,13 +64,13 @@ export default class User extends Component<{}, IState> {
       .catch((error) => this.setState({ error, loading: false }))
   }
 
-  public updateUser(input: IUser, id: string) {
-    this.setState({ loading: true })
-    this.userService
-      .update(input, id)
-      .then(() => this.getUser())
-      .catch((error) => this.setState({ error, loading: false }))
-  }
+  // public updateUser(input: IUser, id: string) {
+  //   this.setState({ loading: true })
+  //   this.userService
+  //     .update(input, id)
+  //     .then(() => this.getUser())
+  //     .catch((error) => this.setState({ error, loading: false }))
+  // }
 
   public deleteUser(id: string) {
     this.setState({ loading: true })
@@ -93,7 +93,7 @@ export default class User extends Component<{}, IState> {
           loading={this.state.loading}
           fields={fields}
           onCreate={(input) => this.createUser(input)}
-          onUpdate={(input) => this.updateUser(input, input._id)}
+          // onUpdate={(input) => this.updateUser(input, input._id)}
           onDelete={(input) => this.deleteUser(input._id)}
         />
       </Fragment>

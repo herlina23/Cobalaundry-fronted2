@@ -26,7 +26,7 @@ function App() {
 
     const fetchData = async () => {
       const respGlobal = await axios(
-        `https://laundry-microservice-users.herokuapp.com/api/v1/trans/trans?i=${username}`
+        `https://laundry-microservice-users.herokuapp.com/api/v1/transacts/transaksi?i=${username}`
       );
       // const respRepos = await axios(
       //   `https://laundry-microservice-transact.herokuapp.com/api/v1/details/search/${username}`
@@ -69,10 +69,10 @@ function App() {
                     <Header as="h4" textAlign="center">
                       <List>
                         <List.Item>
-                          <List.Header>QLaundry</List.Header>bergelimpang
-                          diskon!
+                          <List.Header>QLaundry</List.Header>Your Laundry
+                          Solution!
                         </List.Item>
-                        <List.Item>alamat q-laundry</List.Item>
+                        <List.Item>Singosari</List.Item>
                       </List>
                     </Header>
                     <Header as="h2" textAlign="center">
@@ -91,15 +91,15 @@ function App() {
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Nama Pelanggan</List.Header>
-                                  {dt.member.member_name}
+                                  {dt.member}
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Alamat</List.Header>
-                                  {dt.member.address}
+                                  {dt.address}
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Telepon</List.Header>
-                                  {dt.member.phone}
+                                  {dt.phone}
                                 </List.Item>
                               </List>
                             ))}
@@ -124,11 +124,11 @@ function App() {
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Kasir</List.Header>
-                                  {dt.user.name}
+                                  {dt.user}
                                 </List.Item>
                                 <List.Item>
                                   <List.Header>Status bayar</List.Header>
-                                  {dt.status.status_name}
+                                  {dt.status}
                                 </List.Item>
                               </List>
                             ))}
