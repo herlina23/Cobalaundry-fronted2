@@ -72,11 +72,13 @@ declare interface IItemin {
   item?: IItem | string
   qty: number
   price: number
+  create_date: date
 }
 declare interface IItemout {
   _id: string
   item?: IItem | string
   qty: number
+  create_date: date
 }
 // declare interface IItemout {
 //   _id: string
@@ -90,6 +92,7 @@ declare interface ISalary {
   // user: IUser | string
   user?: IUser | string
   total: number
+  create_date: date
 }
 
 declare interface ITransaction {
@@ -133,6 +136,7 @@ declare interface IOutcome {
   user: IUser | string
   unit: string
   qty: number
+  date: date
 }
 
 declare interface IDas_admin {

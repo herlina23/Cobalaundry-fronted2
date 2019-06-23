@@ -67,7 +67,10 @@ export default class Outcomeins extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Outcome In" subheader="List of Outcome In data" />
+        <Header
+          content="Jenis Pengeluaran"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

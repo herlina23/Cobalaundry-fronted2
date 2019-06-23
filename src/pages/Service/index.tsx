@@ -81,7 +81,10 @@ export default class Service extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Service" subheader="List of service data" />
+        <Header
+          content="Layanan Laundry"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

@@ -67,7 +67,10 @@ export default class Statuss extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Status In" subheader="List of Status In data" />
+        <Header
+          content="Status Pencucian"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

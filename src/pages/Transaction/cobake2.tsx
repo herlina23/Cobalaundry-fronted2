@@ -145,7 +145,10 @@ export default class Transaction extends Component<{}, IState> {
     this.setOptionsData()
     return (
       <Fragment>
-        <Header content="Transaction" subheader="List of Transaction data" />
+        <Header
+          content="Transaksi"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

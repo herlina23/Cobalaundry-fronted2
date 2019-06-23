@@ -40,6 +40,12 @@ const fields: IField[] = [
     label: "Total Gaji",
     validations: ["required", "numeric"],
   },
+  {
+    name: "create_date",
+    label: "Tanggal",
+    // validations: ["required", "numeric"],
+    hideForm: true,
+  },
 ]
 
 export default class Salary extends Component<{}, IState> {
@@ -100,7 +106,10 @@ export default class Salary extends Component<{}, IState> {
     this.setOptionsData()
     return (
       <Fragment>
-        <Header content="Gaji Karyawan" subheader="Daftar Gaji Karyawan" />
+        <Header
+          content="Gaji Karyawan"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

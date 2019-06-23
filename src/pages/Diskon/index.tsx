@@ -112,7 +112,10 @@ export default class Diskon extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Diskon" subheader="List of diskon data" />
+        <Header
+          content="Diskon"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

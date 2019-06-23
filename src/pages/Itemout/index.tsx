@@ -29,6 +29,12 @@ const fields: IField[] = [
     label: "Jumlah",
     validations: ["required", "numeric"],
   },
+  {
+    name: "create_date",
+    label: "Tanggal",
+    // validations: ["required", "numeric"],
+    hideForm: true,
+  },
 ]
 
 export default class Itemouts extends Component<{}, IState> {
@@ -91,7 +97,10 @@ export default class Itemouts extends Component<{}, IState> {
     // console.log(this.state.itemouts)
     return (
       <Fragment>
-        <Header content="Item Out" subheader="List of Item Out data" />
+        <Header
+          content="Barang keluar"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

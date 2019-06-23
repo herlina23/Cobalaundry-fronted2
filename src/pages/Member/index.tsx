@@ -76,7 +76,10 @@ export default class Member extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Member" subheader="List of member data" />
+        <Header
+          content="Member"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

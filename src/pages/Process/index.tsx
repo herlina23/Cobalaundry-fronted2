@@ -67,7 +67,10 @@ export default class Processs extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="Process In" subheader="List of Process In data" />
+        <Header
+          content="Proses Laundry"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

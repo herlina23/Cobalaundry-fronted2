@@ -68,7 +68,7 @@ const fields: IField[] = [
 
 // export default class Idetails extends Component<{}, IState> {
 export default class Detail extends Component<{}, IState> {
-  [x: string]: any
+  [x: string]: any;
   public state: IState = {
     details: [],
     transaction: [],
@@ -145,7 +145,10 @@ export default class Detail extends Component<{}, IState> {
     this.setOptionsData()
     return (
       <Fragment>
-        <Header content="Detail" subheader="List of Detail data" />
+        <Header
+          content="Detail Transaksi"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

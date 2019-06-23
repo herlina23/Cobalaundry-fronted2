@@ -83,7 +83,10 @@ export default class User extends Component<{}, IState> {
   public render() {
     return (
       <Fragment>
-        <Header content="User" subheader="List of User data" />
+        <Header
+          content="User"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

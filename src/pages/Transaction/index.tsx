@@ -187,8 +187,7 @@ export default class Transaction extends Component<{}, IState> {
     fields[3].optionData!.data = this.state.members
   }
   public setOptionsData2() {
-    fields[8
-    ].optionData!.data = this.state.statuss
+    fields[8].optionData!.data = this.state.statuss
   }
 
   public render() {
@@ -196,7 +195,10 @@ export default class Transaction extends Component<{}, IState> {
     this.setOptionsData2()
     return (
       <Fragment>
-        <Header content="Transaction" subheader="List of Transaction data" />
+        <Header
+          content="Transakasi"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}

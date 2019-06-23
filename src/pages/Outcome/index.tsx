@@ -50,6 +50,12 @@ const fields: IField[] = [
     label: "Total",
     validations: ["required", "numeric"],
   },
+  {
+    name: "date",
+    label: "Tanggal",
+    // validations: ["required", "numeric"],
+    hideForm: true,
+  },
 ]
 
 export default class Outcomes extends Component<{}, IState> {
@@ -116,7 +122,11 @@ export default class Outcomes extends Component<{}, IState> {
     this.setOptionsData()
     return (
       <Fragment>
-        <Header content="Outcome" subheader="List of Outcome data" />
+        <Header
+          content="Pengeluaran"
+          subheader="Klik Tabel untuk melakukan perubahan data"
+        />
+        {/* <Header content="" subheader="Klik Tabel untuk edit data" /> */}
         <ErrorMessage
           error={this.state.error}
           onDismiss={() => this.setState({ error: undefined })}
