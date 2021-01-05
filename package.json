@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/bson": "^4.0.0",
     "@types/validator": "^10.9.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bson": "^4.0.2",
     "jspdf": "^1.5.3",
     "lodash": "^4.17.11",
